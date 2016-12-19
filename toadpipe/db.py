@@ -4,6 +4,7 @@
 # psycopg2.pool.ThreadedConnectionPool
 import psycopg2
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
+import sqlite3
 
 
 class PSQLConn(object):
@@ -21,4 +22,14 @@ class PSQLConn(object):
                 user=self.user,
                 password=self.password)
         connection.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
+        return connection
+
+class SqlLiteConn(object):
+    """Stores the connection to psql."""
+    def __init__(self, db, **args):
+        self.db = db
+        self.args = args
+
+    def connect(self):
+        connection = sqlite3.connect(self.db)
         return connection

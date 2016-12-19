@@ -5,7 +5,7 @@ from .db import PSQLConn
 # import sql_files
 
 cred = PSQLConn(os.getenv("GPDB_DATABASE"), os.getenv("GPDB_USER"), os.getenv("GPDB_PASSWORD"), os.getenv("GPDB_HOST"))
-MODEL_NAME = 'src_ip_pca_models'
+MODEL_NAME = 'test'
 TARGET_PATH = os.path.join("target","{}/".format(MODEL_NAME))
 
 
@@ -29,9 +29,10 @@ class ExecSqlTask(luigi.Task):
     """Define user defined functions"""
     date = luigi.DateParameter()
     sql_path = luigi.Parameter()
+    db = luigi.Parameter(default=cred)
 
     def run(self):
-        conn = cred.connect()
+        conn = self.db.connect()
         curs = exec_sql(read_file(self.sql_path), conn)
 
         with self.output().open('w') as out_file:
@@ -43,7 +44,8 @@ class ExecSqlTask(luigi.Task):
 
 class ExecSqlList(luigi.Task):
     date = luigi.DateParameter()
-    sql_path_list = luigi.ListParameter()
+    #sql_path_list = luigi.ListParameter()
+    sql_path_list = luigi.Parameter()
 
     def requires(self):
         return [ExecSqlTask(date=self.date, sql_path=sql_path) for sql_path in self.sql_path_list]
