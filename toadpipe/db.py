@@ -24,12 +24,12 @@ class PSQLConn(object):
         connection.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
         return connection
 
-class SqlLiteConn(object):
-    """Stores the connection to psql."""
-    def __init__(self, db, **args):
-        self.db = db
-        self.args = args
+# class SqlLiteConn(object):
+#     """Stores the connection to psql."""
+#     def __init__(self, db, **args):
+#         self.db = db
+#         self.args = args
 
-    def connect(self):
-        connection = sqlite3.connect(self.db)
-        return connection
+#     def connect(self):
+#         connection = sqlite3.connect(self.db)
+#         return connection

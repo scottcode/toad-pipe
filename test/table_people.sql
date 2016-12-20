@@ -3,6 +3,4 @@ create table people(
     age integer
 );
 
-insert into people values ('Bob', 20);
-insert into people values ('Sarah', 25);
-insert into people values ('Tom', 30);
+insert into people values ('Bob', 20), ('Sarah', 25), ('Tom', 30);

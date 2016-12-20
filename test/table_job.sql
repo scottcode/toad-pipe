@@ -4,6 +4,4 @@ create table job(
 );
 
 
-insert into job values ('Bob', 'carpenter');
-insert into job values ('Sally', 'doctor');
-insert into job values ('Tom', 'janitor');
+insert into job values ('Bob', 'carpenter'), ('Sally', 'doctor'),('Tom', 'janitor');
